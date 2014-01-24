@@ -1,4 +1,4 @@
-## Setup a chroot with a SSH server running on port 220 and ready to be 'ansiblized'
+## Setup a chroot with a SSH server running on port 221 and ready to be 'ansiblized'
 
 ### Prerequisites
 In order for this to work, you must have: 
@@ -41,10 +41,10 @@ If you have something like that:
  Please contact your system administrator.
  Add correct host key in /home/yourhome/.ssh/known_hosts to get rid of this message.
  Offending ECDSA key in /home/yourhome/.ssh/known_hosts:13
-   remove with: ssh-keygen -f "/home/yourhome/.ssh/known_hosts" -R [127.0.0.1]:220
- ECDSA host key for [127.0.0.1]:220 has changed and you have requested strict checking.
+   remove with: ssh-keygen -f "/home/yourhome/.ssh/known_hosts" -R [127.0.0.1]:221
+ ECDSA host key for [127.0.0.1]:221 has changed and you have requested strict checking.
  Host key verification failed.
 ```
 
-it means that you probably had another system running on port 220.
-To get rid of this message, simply run the ssh-keygen command prompted by the message. In my case, this will be 'ssh-keygen -f "/home/yourhome/.ssh/known_hosts" -R [127.0.0.1]:220', stop your chroot and launch it again.
+it means that you probably had another system running on port 221.
+To get rid of this message, simply run the ssh-keygen command prompted by the message. In my case, this will be 'ssh-keygen -f "/home/yourhome/.ssh/known_hosts" -R [127.0.0.1]:221', stop your chroot and launch it again.

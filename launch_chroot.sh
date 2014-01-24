@@ -23,12 +23,12 @@ then
     update
 fi
 
-netstat -ano|grep ':220 '|grep LISTEN|grep -v LISTENING > /dev/null
+netstat -ano|grep ':221 '|grep LISTEN|grep -v LISTENING > /dev/null
 
 if [[ $? == 0 ]] ;
 then
   echo "A chroot is already launched"
-  ssh -X root@127.0.0.1 -p220
+  ssh -X root@127.0.0.1 -p221
   exit 1
 fi
 
@@ -85,4 +85,4 @@ cloneAnsibleIfNotAlreadyDone() {
 launchChroot
 cloneAnsibleIfNotAlreadyDone
 launchAnsible
-ssh -X root@127.0.0.1 -p220
+ssh -X root@127.0.0.1 -p221

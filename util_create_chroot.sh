@@ -61,7 +61,7 @@ customize_chroot() {
 		echo "ssh server not installed, where this chroot come from?"
 		exit 1
         fi
-        sudo sed -i 's/Port 22$/Port 220/' ${chroot_dir}/etc/ssh/sshd_config
+        sudo sed -i 's/Port 22$/Port 221/' ${chroot_dir}/etc/ssh/sshd_config
         sudo rm -rf ${chroot_dir}/var/cache/apt/archives/*.deb
         sudo cp custom_chroot/init_ssh.sh ${chroot_dir}/
         sudo mkdir ${chroot_dir}/root/.ssh/
