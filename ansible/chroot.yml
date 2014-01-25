@@ -2,14 +2,24 @@
 - hosts: 127.0.0.1
   vars:
     user: padawan
-    group: mbs
+    group: coursera
   user: root
   tasks:
   - apt: upgrade=dist
   - apt: pkg=xauth state=installed
 #We allow X11 forwarding
   - copy: dest=/root/.Xauthority content="" owner=root group=root mode=0600
+  - group: name={{group}} state=present
   - user: name={{user}} password={{user}} createhome=yes groups={{group}},sudo shell=/bin/bash
+# SSH
+  - file: path=/home/{{user}} owner={{user}} group={{group}} mode=0774 state=directory
+  - file: path=/home/{{user}}/.ssh owner={{user}} group={{group}} mode=0774 state=directory
+  - lineinfile: dest=/root/.ssh/authorized_keys regexp="chroot" line="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC5wre4xEgakCPVpdIOHZx9HuxRfxcNZ7RVtAHaLvmQtmW1MMHmxSQDYIOxvVkMjvfnzIss2VAAOESNczRx7Mq7qRTZej4FTp7ZrFzUtOHLyhtUOebd9c1839qlXVk34EvbzFvi8ZWKMYYvBmrlNZxXAo7Q0FnNiUlK2Bx4D1inqFpE+E0y5AFFfBEgWNiF03aRCiPrGZN49Kq9hkpgVsI5bE6CNvdtO9ZTu7oNXQ6SQmRshXsZ5ydzfvBWxNE6qzZrj6NnimNwJd7bIsvDk/LB/QZJrVBd+0TzOjRusAVCH2liB2UJB5Sgl7ZVOk6gEyTZphWSvrV0luI4a4uOFpTp chroot@chroot"
+  - command: cp -r /root/.ssh/ /home/{{user}}/
+  - file: path=/home/{{user}}/.ssh/authorized_keys owner={{user}} group={{group}} mode=0600 state=file
+  - file: path=/home/{{user}}/.ssh/id_rsa owner={{user}} group={{group}} mode=0600 state=file
+  - file: path=/home/{{user}}/.ssh/id_rsa.pub owner={{user}} group={{group}} mode=0644 state=file
+  - copy: dest=/home/{{user}}/.Xauthority content="" owner={{user}} group={{group}} mode=0600
   - name: ensure app apt dependencies are installed
     action: apt pkg={{item}}
     with_items:
@@ -27,10 +37,10 @@
   tasks:
   - file: path=/home/{{user}}/src/ state=directory
   - name: clone coursera-android
-    command: git clone https://github.com/aporter/coursera-android.git /home/{{user}}/padawan/src
+    command: git clone https://github.com/aporter/coursera-android.git /home/{{user}}/padawan/src creates=/home/{{user}}/padawan/src
     
   - file: path=/home/{{user}}/zip/ state=directory
   - get_url: url=https://d396qusza40orc.cloudfront.net/android%2FLabs%2FDevelopmentEnvironment%2FDevelopmentEnvironment.zip  dest=/home/{{user}}/zip/
   - file: path=/home/{{user}}/applications/ state=directory
-  - command: unzip android%2FLabs%2FDevelopmentEnvironment%2FDevelopmentEnvironment.zip chdir=/home/{{user}}/applications/ creates=/home/{{user}}/applications/devenv
+  - command: unzip /home/{{user}}/zip/android%2FLabs%2FDevelopmentEnvironment%2FDevelopmentEnvironment.zip chdir=/home/{{user}}/applications/ creates=/home/{{user}}/applications/devenv
   
