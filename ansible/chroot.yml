@@ -10,7 +10,7 @@
 #We allow X11 forwarding
   - copy: dest=/root/.Xauthority content="" owner=root group=root mode=0600
   - group: name={{group}} state=present
-  - user: name={{user}} password={{user}} createhome=yes groups={{group}},sudo shell=/bin/bash
+  - user: name={{user}} password=$6$Cp.Cd3EP$OZcdOXUqDAsjeQmk20tsTQ3OhIi5BP8tQYgNqwsnLyi1QMoy580RQeyxhyIsMk9Z.GoBYu2Ju/NZDEqiMX7Wb1 createhome=yes groups={{group}},sudo shell=/bin/bash
 # SSH
   - file: path=/home/{{user}} owner={{user}} group={{group}} mode=0774 state=directory
   - file: path=/home/{{user}}/.ssh owner={{user}} group={{group}} mode=0774 state=directory
@@ -29,6 +29,20 @@
       - vim
       - tmux 
       - unzip
+      #Eclipse deps
+      - libgtk2.0-0
+      - libxtst6
+# JDK 6.0 installed
+#  - get_url: url=http://download.oracle.com/otn/java/jdk/6u45-b06/jdk-6u45-linux-i586.bin dest=/root
+#  - command: sh /root/jdk-6u45-linux-i586.bin
+  - command: >
+      wget --no-cookies --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2Ftechnetwork%2Fjava%2Fjavase%2Fdownloads%2Fjdk6-downloads-1637591.html;" http://download.oracle.com/otn-pub/java/jdk/6u45-b06/jdk-6u45-linux-i586.bin -O /root/jdk6.bin creates=/root/jdk6.bin
+  - file: path=/root/jdk6.bin  mode=0700 state=file
+  - file: path=/usr/lib/jvm state=directory
+  - command: /root/jdk6.bin chdir=/usr/lib/jvm
+  - command: update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk1.6.0_45/bin/java" 1
+  - command: update-alternatives --install "/usr/bin/javac" "javac" "/usr/lib/jvm/jdk1.6.0_45/bin/javac" 1
+  - command: update-alternatives --install "/usr/bin/javaws" "javaws" "/usr/lib/jvm/jdk1.6.0_45/bin/javaws" 1
 
 - hosts: 127.0.0.1
   user: padawan
@@ -37,10 +51,15 @@
   tasks:
   - file: path=/home/{{user}}/src/ state=directory
   - name: clone coursera-android
-    command: git clone https://github.com/aporter/coursera-android.git /home/{{user}}/padawan/src creates=/home/{{user}}/padawan/src
+    command: git clone https://github.com/aporter/coursera-android.git /home/{{user}}/src creates=/home/{{user}}/src
     
   - file: path=/home/{{user}}/zip/ state=directory
-  - get_url: url=https://d396qusza40orc.cloudfront.net/android%2FLabs%2FDevelopmentEnvironment%2FDevelopmentEnvironment.zip  dest=/home/{{user}}/zip/
   - file: path=/home/{{user}}/applications/ state=directory
-  - command: unzip /home/{{user}}/zip/android%2FLabs%2FDevelopmentEnvironment%2FDevelopmentEnvironment.zip chdir=/home/{{user}}/applications/ creates=/home/{{user}}/applications/devenv
   
+  - get_url: url=https://d396qusza40orc.cloudfront.net/android%2FLabs%2FDevelopmentEnvironment%2FDevelopmentEnvironment.zip  dest=/home/{{user}}/zip/
+  - command: unzip /home/{{user}}/zip/android%2FLabs%2FDevelopmentEnvironment%2FDevelopmentEnvironment.zip chdir=/home/{{user}}/applications creates=/home/{{user}}/applications/DevelopmentEnvironment
+  
+  - get_url: url=http://dl.google.com/android/adt/adt-bundle-linux-x86-20131030.zip  dest=/home/{{user}}/zip/
+  - command: unzip /home/{{user}}/zip/adt-bundle-linux-x86-20131030.zip chdir=/home/{{user}}/applications/ creates=/home/{{user}}/applications/adt-bundle-linux-x86-20131030
+
+

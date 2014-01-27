@@ -28,7 +28,7 @@ netstat -ano|grep ':221 '|grep LISTEN|grep -v LISTENING > /dev/null
 if [[ $? == 0 ]] ;
 then
   echo "A chroot is already launched"
-  ssh -X root@127.0.0.1 -p221
+  ssh -X padawan@127.0.0.1 -p221
   exit 1
 fi
 
