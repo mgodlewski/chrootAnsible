@@ -39,7 +39,7 @@
       wget --no-cookies --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2Ftechnetwork%2Fjava%2Fjavase%2Fdownloads%2Fjdk6-downloads-1637591.html;" http://download.oracle.com/otn-pub/java/jdk/6u45-b06/jdk-6u45-linux-i586.bin -O /root/jdk6.bin creates=/root/jdk6.bin
   - file: path=/root/jdk6.bin  mode=0700 state=file
   - file: path=/usr/lib/jvm state=directory
-  - command: /root/jdk6.bin chdir=/usr/lib/jvm
+  - command: /root/jdk6.bin chdir=/usr/lib/jvm creates=/usr/lib/jvm/jdk1.6.0_45
   - command: update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk1.6.0_45/bin/java" 1
   - command: update-alternatives --install "/usr/bin/javac" "javac" "/usr/lib/jvm/jdk1.6.0_45/bin/javac" 1
   - command: update-alternatives --install "/usr/bin/javaws" "javaws" "/usr/lib/jvm/jdk1.6.0_45/bin/javaws" 1
@@ -56,13 +56,15 @@
   - file: path=/home/{{user}}/zip/ state=directory
   - file: path=/home/{{user}}/applications/ state=directory
   
-  - get_url: url=https://d396qusza40orc.cloudfront.net/android%2FLabs%2FDevelopmentEnvironment%2FDevelopmentEnvironment.zip  dest=/home/{{user}}/zip/
-  - command: unzip /home/{{user}}/zip/android%2FLabs%2FDevelopmentEnvironment%2FDevelopmentEnvironment.zip chdir=/home/{{user}}/applications creates=/home/{{user}}/src/DevelopmentEnvironment
-  
+# Android Development Toolkit (with eclipse)
   - get_url: url=http://dl.google.com/android/adt/adt-bundle-linux-x86-20131030.zip  dest=/home/{{user}}/zip/
   - command: unzip /home/{{user}}/zip/adt-bundle-linux-x86-20131030.zip chdir=/home/{{user}}/applications/ creates=/home/{{user}}/applications/adt-bundle-linux-x86-20131030
-
-
+  
+#Assignments  week 1  
+  - get_url: url=https://d396qusza40orc.cloudfront.net/android%2FLabs%2FDevelopmentEnvironment%2FDevelopmentEnvironment.zip  dest=/home/{{user}}/zip/
+  - command: unzip /home/{{user}}/zip/android%2FLabs%2FDevelopmentEnvironment%2FDevelopmentEnvironment.zip chdir=/home/{{user}}/src creates=/home/{{user}}/src/DevelopmentEnvironment
+#Assignments  week 2
   - get_url: url=https://d396qusza40orc.cloudfront.net/android%2FLabs%2FTheActivityClass%2FTheActivityClass.zip dest=/home/{{user}}/zip/
-  - command: unzip /home/{{user}}/zip/android%2FLabs%2FTheActivityClass%2FTheActivityClass.zip chdir=/home/{{user}}/applications/ creates=/home/{{user}}/src/TheActivityClass
+  - command: unzip /home/{{user}}/zip/android%2FLabs%2FTheActivityClass%2FTheActivityClass.zip chdir=/home/{{user}}/src/ creates=/home/{{user}}/src/TheActivityClass
+
 
