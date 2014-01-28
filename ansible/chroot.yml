@@ -51,15 +51,18 @@
   tasks:
   - file: path=/home/{{user}}/src/ state=directory
   - name: clone coursera-android
-    command: git clone https://github.com/aporter/coursera-android.git /home/{{user}}/src creates=/home/{{user}}/src
+    command: git clone https://github.com/aporter/coursera-android.git /home/{{user}}/src/coursera-android creates=/home/{{user}}/src/coursera-android
     
   - file: path=/home/{{user}}/zip/ state=directory
   - file: path=/home/{{user}}/applications/ state=directory
   
   - get_url: url=https://d396qusza40orc.cloudfront.net/android%2FLabs%2FDevelopmentEnvironment%2FDevelopmentEnvironment.zip  dest=/home/{{user}}/zip/
-  - command: unzip /home/{{user}}/zip/android%2FLabs%2FDevelopmentEnvironment%2FDevelopmentEnvironment.zip chdir=/home/{{user}}/applications creates=/home/{{user}}/applications/DevelopmentEnvironment
+  - command: unzip /home/{{user}}/zip/android%2FLabs%2FDevelopmentEnvironment%2FDevelopmentEnvironment.zip chdir=/home/{{user}}/applications creates=/home/{{user}}/src/DevelopmentEnvironment
   
   - get_url: url=http://dl.google.com/android/adt/adt-bundle-linux-x86-20131030.zip  dest=/home/{{user}}/zip/
   - command: unzip /home/{{user}}/zip/adt-bundle-linux-x86-20131030.zip chdir=/home/{{user}}/applications/ creates=/home/{{user}}/applications/adt-bundle-linux-x86-20131030
 
+
+  - get_url: url=https://d396qusza40orc.cloudfront.net/android%2FLabs%2FTheActivityClass%2FTheActivityClass.zip dest=/home/{{user}}/zip/
+  - command: unzip /home/{{user}}/zip/android%2FLabs%2FTheActivityClass%2FTheActivityClass.zip chdir=/home/{{user}}/applications/ creates=/home/{{user}}/src/TheActivityClass
 
