@@ -32,6 +32,8 @@
       #Eclipse deps
       - libgtk2.0-0
       - libxtst6
+      #Android DT
+      - telnet
 # JDK 6.0 installed
 #  - get_url: url=http://download.oracle.com/otn/java/jdk/6u45-b06/jdk-6u45-linux-i586.bin dest=/root
 #  - command: sh /root/jdk-6u45-linux-i586.bin
