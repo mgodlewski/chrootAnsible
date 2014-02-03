@@ -69,5 +69,6 @@
 #Assignments  week 2
   - get_url: url=https://d396qusza40orc.cloudfront.net/android%2FLabs%2FTheActivityClass%2FTheActivityClass.zip dest=/home/{{user}}/zip/
   - command: unzip /home/{{user}}/zip/android%2FLabs%2FTheActivityClass%2FTheActivityClass.zip chdir=/home/{{user}}/src/ creates=/home/{{user}}/src/TheActivityClass
-
+  - get_url: url=https://d396qusza40orc.cloudfront.net/android%2FLabs%2FTheActivityClass%2FActivityLabTest-v2.zip dest=/home/{{user}}/zip
+  - command: unzip /home/{{user}}/zip/android%2FLabs%2FTheActivityClass%2FActivityLabTest-v2.zip chdir=/home/{{user}}/src/TheActivityClass/SourceFiles/TestCases creates=/home/{{user}}/src/TheActivityClass/SourceFiles/TestCases/ActivityLabTest/
 
