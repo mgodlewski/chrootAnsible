@@ -2,6 +2,7 @@
 - hosts: 127.0.0.1
   vars:
     user: padawan
+    password: $1$SomeSalt$nUpHpwvl1J8CV0S8IvocE/
     group: coursera
   user: root
   tasks:
@@ -10,7 +11,7 @@
 #We allow X11 forwarding
   - copy: dest=/root/.Xauthority content="" owner=root group=root mode=0600
   - group: name={{group}} state=present
-  - user: name={{user}} password=$6$Cp.Cd3EP$OZcdOXUqDAsjeQmk20tsTQ3OhIi5BP8tQYgNqwsnLyi1QMoy580RQeyxhyIsMk9Z.GoBYu2Ju/NZDEqiMX7Wb1 createhome=yes groups={{group}},sudo shell=/bin/bash
+  - user: name={{user}} password={{password}} createhome=yes groups={{group}},sudo shell=/bin/bash
 # SSH
   - file: path=/home/{{user}} owner={{user}} group={{group}} mode=0774 state=directory
   - file: path=/home/{{user}}/.ssh owner={{user}} group={{group}} mode=0774 state=directory
