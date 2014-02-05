@@ -57,6 +57,7 @@
     command: git clone https://github.com/aporter/coursera-android.git /home/{{user}}/src/coursera-android creates=/home/{{user}}/src/coursera-android
     
   - file: path=/home/{{user}}/zip/ state=directory
+  - file: path=/home/{{user}}/unzip/ state=directory
   - file: path=/home/{{user}}/applications/ state=directory
   
 # Android Development Toolkit (with eclipse)
@@ -71,4 +72,17 @@
   - command: unzip /home/{{user}}/zip/android%2FLabs%2FTheActivityClass%2FTheActivityClass.zip chdir=/home/{{user}}/src/ creates=/home/{{user}}/src/TheActivityClass
   - get_url: url=https://d396qusza40orc.cloudfront.net/android%2FLabs%2FTheActivityClass%2FActivityLabTest-v2.zip dest=/home/{{user}}/zip
   - command: unzip /home/{{user}}/zip/android%2FLabs%2FTheActivityClass%2FActivityLabTest-v2.zip chdir=/home/{{user}}/src/TheActivityClass/SourceFiles/TestCases creates=/home/{{user}}/src/TheActivityClass/SourceFiles/TestCases/ActivityLabTest/
+#Assignments  week 3
+  - get_url: url=https://d396qusza40orc.cloudfront.net/android%2FLabs%2FIntents%2FIntents.zip dest=/home/{{user}}/zip/
+  - command: unzip /home/{{user}}/zip/android%2FLabs%2FIntents%2FIntents.zip chdir=/home/{{user}}/unzip/ creates=/home/{{user}}/unzip/Intents
+  - command: cp -R /home/{{user}}/unzip/Intents /home/{{user}}/src/W3-Intents creates=/home/{{user}}/unzip/W3-Intents
+  
+  - get_url: url=https://d396qusza40orc.cloudfront.net/android%2FLabs%2FPermissions%2FPermissions.zip dest=/home/{{user}}/zip/
+  - command: unzip /home/{{user}}/zip/android%2FLabs%2FPermissions%2FPermissions.zip chdir=/home/{{user}}/unzip/ creates=/home/{{user}}/unzip/Permissions
+  - command: cp -R /home/{{user}}/unzip/Permissions /home/{{user}}/src/W3-Permissions creates=/home/{{user}}/unzip/W3-Permissions
+
+  - get_url: url=https://d396qusza40orc.cloudfront.net/android%2FLabs%2FTheFragmentClass%2FFragments.zip dest=/home/{{user}}/zip/
+  - command: unzip /home/{{user}}/zip/android%2FLabs%2FTheFragmentClass%2FFragments.zip chdir=/home/{{user}}/unzip/ creates=/home/{{user}}/unzip/Fragments
+  - command: cp -R /home/{{user}}/unzip/Fragments /home/{{user}}/src/W3-Fragments creates=/home/{{user}}/unzip/W3-Fragments
+  
 
