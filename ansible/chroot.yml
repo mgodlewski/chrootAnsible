@@ -64,6 +64,10 @@
   - get_url: url=http://dl.google.com/android/adt/adt-bundle-linux-x86-20131030.zip  dest=/home/{{user}}/zip/
   - command: unzip /home/{{user}}/zip/adt-bundle-linux-x86-20131030.zip chdir=/home/{{user}}/applications/ creates=/home/{{user}}/applications/adt-bundle-linux-x86-20131030
   
+#Android studio
+  - get_url: url=http://dl.google.com/android/studio/install/0.4.2/android-studio-bundle-133.970939-linux.tgz  dest=/home/{{user}}/zip/
+  - command: tar zxvf /home/{{user}}/zip/android-studio-bundle-133.970939-linux.tgz chdir=/home/{{user}}/applications/ creates=/home/{{user}}/applications/android-studio
+  
 #Assignments  week 1  
   - get_url: url=https://d396qusza40orc.cloudfront.net/android%2FLabs%2FDevelopmentEnvironment%2FDevelopmentEnvironment.zip  dest=/home/{{user}}/zip/
   - command: unzip /home/{{user}}/zip/android%2FLabs%2FDevelopmentEnvironment%2FDevelopmentEnvironment.zip chdir=/home/{{user}}/src creates=/home/{{user}}/src/DevelopmentEnvironment
