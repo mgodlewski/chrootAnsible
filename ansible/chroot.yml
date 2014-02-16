@@ -88,5 +88,8 @@
   - get_url: url=https://d396qusza40orc.cloudfront.net/android%2FLabs%2FTheFragmentClass%2FFragments.zip dest=/home/{{user}}/zip/
   - command: unzip /home/{{user}}/zip/android%2FLabs%2FTheFragmentClass%2FFragments.zip chdir=/home/{{user}}/unzip/ creates=/home/{{user}}/unzip/Fragments
   - command: cp -R /home/{{user}}/unzip/Fragments /home/{{user}}/src/W3-Fragments creates=/home/{{user}}/unzip/W3-Fragments
+#Assignments week 4 
+  - get_url: url=https://d396qusza40orc.cloudfront.net/android%2FLabs%2FUserInterface%2FUserInterface.zip dest=/home/{{user}}/zip/
+  - command: unzip /home/{{user}}/zip/android%2FLabs%2FUserInterface%2FUserInterface.zip chdir=/home/{{user}}/unzip/ creates=/home/{{user}}/unzip/UserInterface
+  - command: cp -R /home/{{user}}/unzip/UserInterface /home/{{user}}/src/W4-UserInterface creates=/home/{{user}}/unzip/W4-UserInterface
   
-
