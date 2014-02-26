@@ -92,4 +92,13 @@
   - get_url: url=https://d396qusza40orc.cloudfront.net/android%2FLabs%2FUserInterface%2FUserInterface.zip dest=/home/{{user}}/zip/
   - command: unzip /home/{{user}}/zip/android%2FLabs%2FUserInterface%2FUserInterface.zip chdir=/home/{{user}}/unzip/ creates=/home/{{user}}/unzip/UserInterface
   - command: cp -R /home/{{user}}/unzip/UserInterface /home/{{user}}/src/W4-UserInterface creates=/home/{{user}}/unzip/W4-UserInterface
+#Assignments week 5
+  - get_url: url=https://d396qusza40orc.cloudfront.net/android%2FLabs%2FUserNotifications%2FNotifications.zip dest=/home/{{user}}/zip/
+  - command: unzip /home/{{user}}/zip/android%2FLabs%2FUserNotifications%2FNotifications.zip chdir=/home/{{user}}/unzip/ creates=/home/{{user}}/unzip/Notifications
+  - command: cp -R /home/{{user}}/unzip/Notifications /home/{{user}}/src/W5-Notifications creates=/home/{{user}}/unzip/W5-Notifications
+#Assignments week 6
+  - get_url: url=https://d396qusza40orc.cloudfront.net/android%2FLabs%2FGraphics%2FGraphics.zip dest=/home/{{user}}/zip/
+  - command: unzip /home/{{user}}/zip/android%2FLabs%2FGraphics%2FGraphics.zip chdir=/home/{{user}}/unzip/ creates=/home/{{user}}/unzip/Graphics
+  - command: cp -R /home/{{user}}/unzip/Graphics /home/{{user}}/src/W6-Graphics creates=/home/{{user}}/unzip/W6-Graphics
+  
   
